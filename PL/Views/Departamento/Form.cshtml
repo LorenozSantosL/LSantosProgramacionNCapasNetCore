@@ -1,0 +1,88 @@
+﻿@model ML.Departamento
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Form</h2>
+
+    
+
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form", "Departamento", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group" style = "display: none;">
+                        <div class="">
+
+                            @Html.LabelFor(model => model.IdDepartamento, new { @class = "hidden" })
+
+                            @Html.TextBoxFor(model => model.IdDepartamento, new { @class = "hidden form-control" })
+
+                            @Html.ValidationMessageFor(model => model.IdDepartamento)
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="">
+
+                            @Html.LabelFor(model => model.Nombre)
+
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "textNombre" })
+
+                            @Html.ValidationMessageFor(model => model.Nombre)
+                        </div>
+
+                    </div>
+                    </div>
+
+                    <div class="col-3">
+                         <div class="form-group">
+                            <div class="">
+
+                                @Html.LabelFor(model => model.Area.IdArea)
+                                @*  @Html.TextBoxFor(model => model.Rol.IdRol, new { @class = "form-control" }) *@
+
+                                @Html.DropDownListFor(model => model.Area.IdArea, new SelectList(Model.Area.Areas, "IdArea", "Nombre"), "Seleciona un Area", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Area.IdArea)
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-2">
+                    <div class="form-group">
+                        <div class="col-md-12 d-flex justify-content-evenly p-2">
+
+
+                            <input type="submit" value="Guardar" class="btn btn-success" />
+
+                            @Html.ActionLink("Regresar", "GetAll", "Departamento", htmlAttributes: new { @class = "btn btn-danger" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    
+
+                   
+                   
+
+
+                    
+
+                </div>
+
+            }
+
+        </div>
+
+    
+</div>
+

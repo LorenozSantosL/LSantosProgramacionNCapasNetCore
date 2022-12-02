@@ -1,0 +1,153 @@
+﻿@model ML.Producto
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Productos</h2>
+
+
+    <div class="row">
+
+         <div class="col-11">
+
+             <div class="row">
+                    <div>
+                            @using (Html.BeginForm("GetAll", "Producto", FormMethod.Post, new { enctype ="multipart/form-data"}))
+                             {
+                             <div class="row">
+
+                                 <div class="col-4">
+                                                <div class="">
+                                                    @Html.DropDownListFor(model => model.Proveedor.IdProveedor, new SelectList(Model.Proveedor.Proveedores, "IdProveedor", "Telefono"), "Slecione un proveedor", new { id = "ddlProveedor", @class = "form-control" })
+                                                </div>
+                                 </div>
+
+                                 <div class="col-4" >
+                                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder= "Nombre" } )
+                                </div>
+
+                                <div class="col-md-3">
+                                     <input type="submit" value="Buscar" class="btn btn-info" />
+                                </div>
+                              </div>
+
+                             }
+                    </div>
+
+             </div>
+
+         </div>
+
+
+          <div class="col-1">
+              <div>
+                    @Html.ActionLink("+", "Form", "Producto", htmlAttributes: new { @class ="btn btn-success"})
+              </div>
+
+         </div>
+
+
+    </div>
+
+    
+
+
+
+    <hr />
+    <div class="row">
+        @*<div class="table-responsive">*@
+
+        <table class="table" id="tablaProducto">
+            <thead>
+                <tr>
+                    <!--<th>IdProducto</th>-->
+                    <th>Nombre</th>
+                    <th>PrecioUnitario</th>
+                    <th>Stock</th>
+                    @*<th>IdProveedor</th>*@
+                    <th>Telefono</th>
+                    @*<th>IdDepartamento</th>*@
+                    <th>NombreDepartamento</th>
+                    @*<th>IdArea</th>*@
+
+                    <th>NombreArea</th>
+                    <th>Descripcion</th>
+                    <th>Imagen</th>
+
+
+
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (ML.Producto producto in Model.Productos)
+                             {
+                <tr>
+                    @*<td class="hidden">@producto.IdProducto</td>*@
+                    <td>@producto.Nombre </td>
+                    <td>@producto.PrecioUnitario</td>
+                    <td>@producto.Stock</td>
+                    <td>@producto.Proveedor.Telefono</td>
+
+                    <td>@producto.Departamento.Nombre</td>
+                    <td>@producto.Departamento.Area.Nombre</td>
+                    <td>@producto.Descripcion</td>
+                    @*<td class="hidden">@usuario.Rol.IdRol</td>*@
+                    
+                    @if (producto.Imagen != null)
+                            {
+                    <td><img src="data:image/jpeg;base64, @producto.Imagen" style=" height: 150px; width: 150px;" /></td>
+                            }
+                            else
+                            {
+                    <td><img src="~/productoSinImagen.png" style=" height: 150px; width: 160px;" alt="Imagen usuario"></td>
+                            }
+
+
+                    
+
+                    <td class="text-center"><a class="btn btn-warning bi bi-pencil-square" href="@Url.Action("Form","Producto", new { IdProducto = producto.IdProducto})"></a></td>
+                    <td class="text-center"><a class="btn btn-danger bi bi-trash3" href="@Url.Action("Delete","Producto", new { IdProducto = producto.IdProducto })" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a></td>
+                </tr>
+                             }
+            </tbody>
+        </table>
+
+        @*</div>*@
+    </div>
+</div>
+
+
+
+@section Scripts
+{
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.material.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#tablaProducto').DataTable({
+            searching: false,
+            "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
+            autoWidth: false,
+            columnDefs: [
+                {
+                    targets: ['_all'],
+                    className: 'mdc-data-table__cell',
+                },
+            ],
+            language: {
+                url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+            },
+         });
+    });
+</script>
+
+}

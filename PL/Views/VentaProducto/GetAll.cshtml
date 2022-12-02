@@ -1,0 +1,76 @@
+﻿@model ML.Producto
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Productos</h2>
+
+
+   
+
+    
+
+
+
+    <hr />
+    <div class="row">
+        @*<div class="table-responsive">*@
+
+       
+  
+
+            
+                @foreach (ML.Producto producto in Model.Productos)
+                {
+                    
+                        <div class="card " style="width: 18rem; margin: 0 .6rem">
+                            @if (producto.Imagen != null)
+                                {
+                                    <img src="data:image/jpeg;base64, @producto.Imagen" class="card-img-top"  />
+                                }
+                                else
+                                {
+                                    <img src="~/productoSinImagen.png" class="card-img-top" >
+                                }
+                          <div class="card-body">
+                            <h5 class="card-title">@producto.Nombre</h5>
+                            <p class="card-text">@producto.Descripcion</p>
+                          </div>
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item">@producto.PrecioUnitario</li>
+                            <li class="list-group-item">@producto.Departamento.Nombre</li>
+                            <li class="list-group-item">@producto.Departamento.Area.Nombre</li>
+                          </ul>
+                          <div class="card-body">
+                            @*<a href="#" class="card-link">comprar</a>*@
+                           
+                             <a class="btn btn-outline-success bi bi-cart-plus" href="@Url.Action("AgregarACarrito","VentaProducto", new { IdProducto = producto.IdProducto})">Añadir</a>
+                          </div>
+                        </div>
+                    
+
+                
+                    @*<td class="hidden">@producto.IdProducto</td>*@
+                   @* <td>@producto.Nombre </td>
+                    <td>@producto.PrecioUnitario</td>
+                    <td>@producto.Stock</td>
+                    <td>@producto.Proveedor.Telefono</td>
+
+                    <td>@producto.Departamento.Nombre</td>
+                    <td>@producto.Departamento.Area.Nombre</td>
+                    <td>@producto.Descripcion</td>*@
+                    @*<td class="hidden">@usuario.Rol.IdRol</td>*@
+                    
+                   
+
+                
+                             }
+            
+       
+
+
+    </div>
+</div>
+

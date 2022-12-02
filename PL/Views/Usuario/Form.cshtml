@@ -1,0 +1,826 @@
+﻿@model ML.Usuario
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Usuario</h2>
+
+
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+                <div class="row">
+                    <div class="col-8">
+                        <div class="row">
+                    
+                            <div class="col-6">
+
+                                    <div class="form-group" style = "display: none;">
+                                            <div class="col-md-3">
+
+                                                @Html.LabelFor(model => model.IdUsuario, new { @class = "hidden" })
+
+                                                @Html.TextBoxFor(model => model.IdUsuario, new { @class = "hidden form-control" })
+
+                                                @Html.ValidationMessageFor(model => model.IdUsuario)
+
+                                            </div>
+
+                                    </div>
+                                 <div class="form-group">
+                                    <div class="">
+
+                                        @Html.LabelFor(model => model.Nombre)
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-vcard"></i></span>
+                                              @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "textNombre", @onkeypress = "return SoloLetras(event,'lblNombre')" })
+
+                                              @Html.ValidationMessageFor(model => model.Nombre)
+                                              @Html.Label("",null, new {@id="lblNombre",@style="display: block;"})
+                                             
+                                             
+
+                                        </div>
+                                        
+                                    </div>
+
+                                </div>
+                             </div>
+
+                            <div class="col-6">
+                                 <div class="form-group">
+                                    <div class="">
+
+                                        @Html.LabelFor(model => model.Telefono)
+
+                                        <div class="input-group mb-6">
+                                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-telephone"></i></span>
+                                             @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", @id="txtTelefono", @onkeypress = "return SoloNumeros(event,'lblTelefono')" })
+                                             @Html.ValidationMessageFor(model => model.Telefono)
+                                             @Html.Label("",null, new {@id="lblTelefono",@style="display: block;"})
+
+                                        </div>
+                                        
+
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="row">
+                    
+                            <div class="col-6">
+
+                                   <div class="form-group">
+                                        <div class="c">
+
+                                            @Html.LabelFor(model => model.ApellidoPaterno)
+
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-vcard"></i></span>
+                                                  @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id= "textApellidoPaterno", @onkeypress = "return SoloLetras(event,'lblApellidoPatero')" })
+                                                  @Html.ValidationMessageFor(model => model.ApellidoPaterno)
+                                                  @Html.Label("",null, new {@id="lblApellidoPatero",@style="display: block;"})
+                                            </div>
+
+                                            
+
+                                        </div>
+
+                                    </div>
+                             </div>
+
+                              <div class="col-6">
+                        
+                              
+
+                                <div class="form-group">
+                                        <div class="">
+
+                                            @Html.LabelFor(model => model.Celular)
+
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-phone"></i></span>
+                                                 @Html.TextBoxFor(model => model.Celular, new { @class = "form-control", @id="textCelular", @onkeypress = "return SoloNumeros(event,'lblCelular')" })
+                                                 @Html.ValidationMessageFor(model => model.Celular)
+                                                 @Html.Label("",null, new {@id="lblCelular"})
+                                            </div>
+                                            
+
+                                        </div>
+                                     </div>
+                            </div>
+
+                           
+
+                    
+
+
+
+                        </div>
+
+                        <div class="row">
+                    
+                            <div class="col-6">
+
+                                     <div class="form-group">
+                                        <div class="">
+
+                                            @Html.LabelFor(model => model.ApellidoMaterno)
+
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-vcard"></i></span>
+                                                  @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id="textApellidoMaterno",  @onkeypress = "return SoloLetras(event,'lblApellidoMaterno')" })
+                                                  @Html.ValidationMessageFor(model => model.ApellidoMaterno)
+                                                  @Html.Label("",null, new {@id="lblApellidoMaterno",@style="display: block;"})
+                                            </div>
+
+                                            
+                                        </div>
+                                     </div>
+                             </div>
+                             
+                            <div class="col-6">
+                        
+                                   
+
+                                     <div class="form-group">
+                                    <div class="">
+
+                                        @Html.LabelFor(model => model.Email)
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope-at-fill"></i></span>
+                                             @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "textEmail", @onblur="return ValidarEmail(event,'lblEmail')"})
+                                             @Html.ValidationMessageFor(model => model.Email)
+                                                @Html.Label("",null, new {@id="lblEmail",@style="display: block;"})
+                                        </div>
+                                        
+
+                                    </div>
+                                </div>
+                             </div>
+                           
+
+
+                        </div>
+
+                         <div class="row">
+                    
+                            <div class="col-6">
+
+                                      <div class="form-group">
+                                            <div class="">
+
+                                                @Html.LabelFor(model => model.FechaNacimiento)
+
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-calendar-date"></i></span>
+                                                     @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control", @placeholder="dd-MM-yyyy", @id="textFecha" })
+                                                     @Html.ValidationMessageFor(model => model.FechaNacimiento)
+                                                </div>
+
+                                                
+
+                                            </div>
+                                       </div>
+                             </div>
+
+                             <div class="col-6">
+                        
+                                   
+
+                                     <div class="form-group">
+                                    <div class="">
+                                        @Html.Label("Confirmar Email")
+                                        @*@Html.LabelFor(model => model.Email)*@
+
+                                        <div class="input-group mb-3">
+                                            
+                                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope-at-fill"></i></span>
+                                             @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "textEmailConfirmar", @onblur="return ConfirmarEmail(event,'lblEmailConfirmar')"})
+                                             @Html.ValidationMessageFor(model => model.Email)
+                                                @Html.Label("",null, new {@id="lblEmailConfirmar",@style="display: block;"})
+                                        </div>
+                                        
+
+                                    </div>
+                                </div>
+                             </div>
+
+
+                        </div>
+
+                         <div class="row">
+                    
+                            <div class="col-6">
+
+                                     <div class="form-group">
+                                        <div class="row justify-content-evenly">
+
+                                            @Html.LabelFor(model => model.Sexo)
+                                            @*@Html.TextBoxFor(model => model.Sexo, new { @class = "form-control" })*@
+                                            <div>
+                                                 @Html.RadioButtonFor(model => model.Sexo, "M") @Html.DisplayName("Masculino")
+                                            </div>
+                                            <div>
+                                                 @Html.RadioButtonFor(model => model.Sexo, "F") @Html.DisplayName("Femenino")
+                                            </div>
+                                           
+                                            @Html.ValidationMessageFor(model => model.Sexo)
+
+                                        </div>
+                                    </div>
+                             </div>
+
+  
+
+
+                        </div>
+
+                        <div class="row">
+                    
+                            <div class="col-6">
+
+                                     <div class="form-group">
+                                            <div class="">
+
+                                                @Html.LabelFor(model => model.CURP)
+
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-vcard"></i></span>
+                                                      @Html.TextBoxFor(model => model.CURP, new { @class = "form-control", @id="textCURP", @onkeypress = "return SoloMayusculasYNumeros(event,'lblCURP')" })
+                                                      @Html.ValidationMessageFor(model => model.CURP)
+                                                      @Html.Label("",null, new {@id="lblCURP"})
+
+                                                </div>
+
+                                                
+
+                                            </div>
+                                     </div>
+                             </div>
+
+                             
+
+
+                        </div>
+
+          
+
+
+                    </div>
+                
+                        <div class="col-4">
+                            <div class="row">
+                                 <div class="form-group">
+
+                                        <div class="">
+                                            @Html.LabelFor(model => model.Imagen)
+
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-image"></i></span>
+                                                <input type="file" name="inputImagen" onchange="readURL(this);" class="input-group-text">
+                                            </div>
+
+                                            
+                                            @if (Model.Imagen != null)
+                                            {
+                                                <img id="ImagenPreview" src="data:image/jpeg;base64, @(Model.Imagen)" width="150" height="150" class="rounded mx-auto d-block" />
+                                            }
+                                            else
+                                            {
+                                                <img id="ImagenPreview" src="~/userImagen.png" style=" height: 150px; width: 150px; " class="rounded mx-auto d-block" />
+                                            }
+
+                                            @Html.ValidationMessageFor(model => model.Imagen)
+                                        </div>
+
+                                 </div>
+                                 @Html.HiddenFor(model => model.Imagen)
+                            </div>
+                                     <div class="row">
+                                         @Html.LabelFor(model => model.UserName)  
+                                         <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-fill"></i></span>
+                                              @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @id="textUserName", @onkeypress = "return SoloLetrasNumerosYGuionBajo(event,'lblUserName')" })
+                                              @Html.ValidationMessageFor(model => model.UserName)
+                                              @Html.Label("",null, new {@id="lblUserName"})
+                                        </div>
+                                         
+                                    </div>
+                            
+                             <div class="row">
+                                 <div class="form-group">
+                                        <div class="">
+
+                                            @Html.LabelFor(model => model.Password)
+
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-key"></i></span>
+                                                 @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @id="textPassword", @type="password", @onblur="return ValidarContrasena(event,'lblPassword')" })
+                                                 @Html.ValidationMessageFor(model => model.Password)
+                                                 @Html.Label("",null, new {@id="lblPassword"})
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <div class="row">
+                                 <div class="form-group">
+                                        <div class="">
+
+                                            @*@Html.LabelFor(model => model.Password)*@
+                                            @Html.Label("Confirmar contraseña")
+
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-key"></i></span>
+                                                 @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @id="textPasswordConfirmar", @type="password", @onblur="return ConfirmarContrasena(event,'lblPasswordConfirmar')" })
+                                                 @Html.ValidationMessageFor(model => model.Password)
+                                                 @Html.Label("",null, new {@id="lblPasswordConfirmar"})
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                        <div class="">
+
+                                        @Html.LabelFor(model => model.Rol.IdRol)
+                                        @*  @Html.TextBoxFor(model => model.Rol.IdRol, new { @class = "form-control" }) *@
+
+                                        <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-workspace"></i></span>
+                                                         @Html.DropDownListFor(model => model.Rol.IdRol, new SelectList(Model.Rol.Roles, "IdRol", "Nombre"), "Seleciona un rol", new { @class = "form-control form-select" })
+                                                         @Html.ValidationMessageFor(model => model.Rol.IdRol)
+                                        </div>
+
+                                    
+
+                                    </div>
+                                 </div>
+                            </div>
+
+                            
+
+                      </div>
+
+                </div>
+                <br />
+
+                    <div class="row">
+                        <h3>Dirección</h3>
+
+                         <div class="col-3">
+
+                                       <div class="form-group">
+                                            <div class="">
+                                                @Html.LabelFor(model => model.Direccion.Colonia.Municipio.Estado.Pais.IdPais)
+
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-globe-americas"></i></span>
+                                                     @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.Estado.Pais.IdPais, new SelectList(Model.Direccion.Colonia.Municipio.Estado.Pais.Paises, "IdPais", "Nombre"), "Slecione un país", new { id = "ddlPais", @class = "form-control form-select" })
+                                                     @Html.ValidationMessageFor(model => model.Direccion.Colonia.Municipio.Estado.Pais.IdPais)
+                                                </div>
+
+                                                
+
+                                            </div>
+                                     </div>
+                        </div>
+
+                          <div class="col-3">
+
+                                       <div class="form-group">
+                                            <div class="">
+                                                @Html.LabelFor(model => model.Direccion.Colonia.Municipio.Estado)
+
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-geo-alt"></i></span>
+                                                     @if (Model.Direccion.Colonia.Municipio.Estado.Estados == null)
+                                                        {
+                                                            @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.Estado.IdEstado, new SelectList(string.Empty, "Value", "Text"), "Selecciona un estado", htmlAttributes: new { id = "ddlEstado", @class = "form-control form-select" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.Estado.IdEstado, new SelectList(Model.Direccion.Colonia.Municipio.Estado.Estados, "IdEstado", "Nombre"), "Selecione un estado", new { id = "ddlEstado", @class = "form-control form-select" })
+                                                        }
+                                                </div>
+
+                                                
+
+                                            </div>
+                                       </div>
+                        </div>
+                        <div class="col-3">
+                        
+                            <div class="form-group">
+                                <div class="">
+
+
+                                    @Html.LabelFor(model => model.Direccion.Colonia.Municipio)
+
+                                    <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-geo-alt"></i></span>
+                                                         @if (Model.Direccion.Colonia.Municipio.Municipios == null)
+                                                            {
+                                                                @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.IdMunicipio, new SelectList(string.Empty, "Value", "Text"), "Selccione un Municipio", htmlAttributes: new { id = "ddlMunicipio", @class = "form-control form-select" })
+                                                            }
+                                                            else
+                                                            {
+                                                                @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.IdMunicipio, new SelectList(Model.Direccion.Colonia.Municipio.Municipios, "IdMunicipio", "Nombre"), "Seleccione un Municipio", htmlAttributes: new { id = "ddlMunicipio", @class = "form-control form-select" });
+                                                            }
+                                    </div>
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+
+                                <div class="">
+
+
+                                    @Html.LabelFor(model => model.Direccion.Colonia)
+
+                                    <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-geo-alt-fill"></i></span>
+                                                         @if (Model.Direccion.Colonia.Colonias == null)
+                                                            {
+                                                                @Html.DropDownListFor(model => model.Direccion.Colonia.IdColonia, new SelectList(string.Empty, "Value", "Text"), "Selccione una Colonia", htmlAttributes: new { id = "ddlColonia", @class = "form-control form-select" })
+                                                            }
+                                                            else
+                                                            {
+                                                                @Html.DropDownListFor(model => model.Direccion.Colonia.IdColonia, new SelectList(Model.Direccion.Colonia.Colonias, "IdColonia", "Nombre"), "Seleccione una Colonia", htmlAttributes: new { id = "ddlColonia", @class = "form-control form-select" })
+                                                            }
+                                    </div>
+
+
+                                    
+
+                                </div>
+                             </div>
+                        </div>
+
+                                 
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-8">
+                             <div class="form-group">
+                                    <div class="col-md-3" style="display: none;">
+
+                                        @Html.LabelFor(model => model.Direccion.IdDireccion, new { @class = "hidden" })
+
+                                        @Html.TextBoxFor(model => model.Direccion.IdDireccion, new { @class = "hidden form-control" })
+
+                                        @Html.ValidationMessageFor(model => model.Direccion.IdDireccion)
+
+                                    </div>
+
+                             </div>
+                              <div class="form-group">
+                                    <div class="">
+
+                                        @Html.LabelFor(model => model.Direccion.Calle)
+
+                                        <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-house-fill"></i></span>
+                                                 @Html.TextBoxFor(model => model.Direccion.Calle, new { @class = "form-control", @id = "textCalle" })
+
+                                                 @Html.ValidationMessageFor(model => model.Direccion.Calle)
+                                        </div>
+
+                                        
+                                    </div>
+
+                             </div>
+                        </div>
+
+                        <div class="col-2">
+                            <div class="form-group">
+                                    <div class="">
+
+                                        @Html.LabelFor(model => model.Direccion.NumeroInterior)
+
+                                        <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-building"></i></span>
+                                                 @Html.TextBoxFor(model => model.Direccion.NumeroInterior, new { @class = "form-control", @id = "textNumeroInterior", @onkeypress = "return SoloNumeros(event,'lblNumeroInterior')" })
+
+                                                 @Html.ValidationMessageFor(model => model.Direccion.NumeroInterior)
+                                                 @Html.Label("",null, new {@id="lblNumeroInterior",@style="display: block;"})
+                                        </div>
+
+                                        
+                                    </div>
+
+                             </div>
+                        </div>
+
+                        <div class="col-2">
+                            <div class="form-group">
+                                <div class="">
+
+                                    @Html.LabelFor(model => model.Direccion.NumeroExterior)
+
+                                     <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-house"></i></span>
+                                                 @Html.TextBoxFor(model => model.Direccion.NumeroExterior, new { @class = "form-control", @id = "textNumeroExterior", @onkeypress = "return SoloNumeros(event,'lblNumeroExterior')" })
+
+                                                 @Html.ValidationMessageFor(model => model.Direccion.NumeroExterior)
+                                                 @Html.Label("",null, new {@id="lblNumeroExterior",@style="display: block;"})
+                                        </div>
+
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+                <div class="row p-2 ">
+                    <div class="form-group p-2" >
+                        <div class="col-md-12 d-flex justify-content-evenly p-2">
+
+
+                            <input type="submit" value="Guardar" class="btn btn-success" />
+
+                            @Html.ActionLink("Regresar", "GetAll", "Usuario", htmlAttributes: new { @class = "btn btn-danger" })
+
+                        </div>
+                    </div>
+                </div>
+                
+
+            }
+
+        </div>
+
+    
+</div>
+
+@section Scripts
+{
+                  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+              <link rel="stylesheet" href="/resources/demos/style.css">
+              <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+              <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+
+    
+    <script type="text/javascript">
+
+    
+        $(document).ready(function () {
+            $("#ddlPais").change(function () {
+                $("#ddlEstado").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetEstado")',
+                    dataType: 'json',
+                    data: { IdPais: $("#ddlPais").val() },
+                    success: function (estados) {
+                        $("#ddlEstado").append('<option value="0">' + 'Seleccione una opción' + '</option>');
+                        $.each(estados, function (i, estados) {
+                            $("#ddlEstado").append('<option value="'
+                                + estados.idEstado + '">'
+                                + estados.nombre + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed.' + ex);
+                    }
+                });
+            });
+
+            $("#ddlEstado").change(function () {
+                $("#ddlMunicipio").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetMunicipio")',
+                    dataType: 'json',
+                    data: { IdEstado: $("#ddlEstado").val() },
+                    success: function (municipios) {
+                        $("#ddlMunicipio").append('<option value="0">' + 'Seleccione una opción' + '</option>');
+                        $.each(municipios, function (i, municipios) {
+                            $("#ddlMunicipio").append('<option value="'
+                                + municipios.idMunicipio + '">'
+                                + municipios.nombre + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed.' + ex);
+                    }
+
+                });
+            });
+
+
+            $("#ddlMunicipio").change(function () {
+                $("#ddlColonia").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetColonia")',
+                    dataType: 'json',
+                    data: { IdMunicipio: $("#ddlMunicipio").val() },
+                    success: function (colonias) {
+                        $("#ddlColonia").append('<option value="0">' + 'Seleccione una opción' + '</option>');
+                        $.each(colonias, function (i, colonias) {
+                            $("#ddlColonia").append('<option value="'
+                                + colonias.idColonia + '">'
+                                + colonias.nombre + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed.' + ex);
+                    }
+
+                });
+            });
+
+             $( function() {
+                    $( "#textFecha" ).datepicker({
+                      dateFormat: 'dd-mm-yy',
+                      changeMonth: true,
+                      changeYear: true,
+                      yearRange: '-100:+0'
+                    });
+                  } );
+
+          });
+
+
+    </script>
+
+
+    <script type="text/javascript">
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ImagenPreview').attr('src', e.target.result);
+
+            };
+
+            reader.readAsDataURL(input.files[0]);
+
+        }
+    }
+
+
+   
+ //   function validarFormatocorreo(email){
+ //       var regex = new RegExp("/^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/");
+        
+ //       if(!regex.test(email))
+ //           {
+ //               alert('Por favor ingresar un Email Valido');
+               
+               
+            
+ //           }
+ //}
+
+    function SoloNumeros(e, controlId) {
+            var caracter = e.key;
+            if (!/^[0-9]/g.test(caracter)) {
+                $('#' + controlId).text("Solo se aceptan numeros");
+                $('#' + controlId).css({ "color": "red" });
+                return false;
+            }
+            else {
+                $('#' + controlId).text("");
+                return true;
+            }
+         }
+
+    function SoloLetras(e, controlId) {
+        var caracter = e.key;
+        if(!/^[a-zA-Z\u00C0-\u00FF ]*$/g.test(caracter)) {
+            $('#' + controlId).text("Solo se aceptan letras");
+            $('#' + controlId).css({ "color": "red"});
+            return false;
+        }
+        else{
+            $('#' + controlId).text("");
+            return true;
+        }
+    }
+
+    function SoloLetrasNumerosYGuionBajo(e, controlId)
+    {
+        var caracter = e.key;
+        if(!/^[A-Za-z0-9_]/g.test(caracter)) {
+            $('#' + controlId).text("Solo se aceptan letras, números y guion bajo");
+            $('#' + controlId).css({ "color": "red"});
+            return false;
+        }
+        else{
+            $('#' + controlId).text("");
+            return true;
+        }
+    }
+
+    function SoloMayusculasYNumeros(e, controlId)
+    {
+        var caracter = e.key;
+        if(!/^[A-Z0-9]/g.test(caracter)) {
+            $('#' + controlId).text("Solo se aceptan Mayusculas y números");
+            $('#' + controlId).css({ "color": "red"});
+            return false;
+        }
+        else{
+            $('#' + controlId).text("");
+            return true;
+        }
+    }
+
+    function ValidarEmail(e, controlId)
+    {
+       var value = $("#textEmail").val(); 
+        if(!/^([\w\.\-]+)@@([\w\-]+)((\.(\w){2,3})+)$/g.test(value)) {
+            $('#' + controlId).text("La dirección de Email es incorrecta");
+            $('#' + controlId).css({ "color": "red"});
+            return false;
+        }
+        else{
+            $('#' + controlId).text("");
+            return true;
+        }
+    }
+
+    function ValidarContrasena(e, controlId){
+        var value = $("#textPassword").val();
+        if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{10,}$/g.test(value)) {
+            $('#' + controlId).text("La contraseña debe de tener una letra mayuscula/minuscula, un número y minimo 10 caracteres");
+            $('#' + controlId).css({ "color": "red"});
+            return false;
+        }
+        else{
+            $('#' + controlId).text("");
+            return true;
+        }
+    }
+
+    function ConfirmarEmail(e, controlId) {
+
+        if($("#textEmail").val() != $("#textEmailConfirmar").val())
+        {
+             $('#' + controlId).text("Los Emails no coinciden");
+            $('#' + controlId).css({ "color": "red"});
+            return false;
+        }
+        else{
+            $('#' + controlId).text("");
+            return true;
+        }
+        
+
+    }
+
+    function ConfirmarContrasena(e, controlId) {
+
+        if($("#textPassword").val() != $("#textPasswordConfirmar").val())
+        {
+             $('#' + controlId).text("Las Contraseñas no coinciden");
+            $('#' + controlId).css({ "color": "red"});
+            return false;
+        }
+        else{
+            $('#' + controlId).text("");
+            return true;
+        }
+        
+
+    }
+
+
+
+
+    
+</script>
+
+
+
+
+}

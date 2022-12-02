@@ -1,0 +1,130 @@
+﻿@model ML.VentaProducto
+@{
+    ViewData["Title"] = "Carrito";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Carrito</h2>
+
+
+
+    <div class="row">
+        <div class="col-4">
+                <div>
+                     @Html.ActionLink("Seguir Comprando", "GetAll", "VentaProducto", htmlAttributes: new { @class = "btn btn-success" })
+                </div>
+            </div>
+        
+    </div>
+
+    <div class="row">
+        @*<div class="table-responsive">*@
+
+        <table class="table" id="tablaProducto">
+            <thead>
+                <tr>
+                    <!--<th>IdProducto</th>-->
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>PrecioUnitario</th>
+                    <th>Stock</th>
+                    <th>Agregar</th>
+                    <th>Cantidad</th>
+                    <th>Desagregar</th>
+                    <th>Imagen</th>
+                    <th>Eliminar</th>
+                    @*<th>IdArea</th>*@
+
+                    @*<th>NombreArea</th>
+                    <th>Descripcion</th>
+                    <th>Imagen</th>
+
+
+
+                    <th>Editar</th>
+                    <th>Eliminar</th>*@
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (ML.VentaProducto ventaProducto in Model.VentaProductos)
+                             {
+                <tr>
+                    @*<td class="hidden">@producto.IdProducto</td>*@
+                    <td>@ventaProducto.Producto.Nombre </td>
+                    <td>@ventaProducto.Producto.Descripcion </td>
+                    <td>@ventaProducto.Producto.PrecioUnitario</td>
+                    <td>@ventaProducto.Producto.Stock</td>
+                    <td><a class="btn btn-outline-success " href="@Url.Action("Agregar", "VentaProducto", new { IdProducto= ventaProducto.Producto.IdProducto})"><i class="bi bi-plus"></i></a></td>
+            
+                    <td><button id="idproducto+ @ventaProducto.Producto.IdProducto" type="button" class="btn btn-success" onclick="Agregar(@ventaProducto.Producto.IdProducto, this.id)"><i class="bi bi-plus"></i></button></td>
+                    <td id="Cantidad">@ventaProducto.Cantidad</td>
+                    <td><a class="btn btn-outline-danger " href="@Url.Action("Desagregar", "VentaProducto", new { IdProducto= ventaProducto.Producto.IdProducto})"><i class="bi bi-dash"></i></a></td>
+                    @if (ventaProducto.Producto.Imagen != null)
+                            {
+                    <td><img src="data:image/jpeg;base64, @ventaProducto.Producto.Imagen" style=" height: 150px; width: 150px;" /></td>
+                            }
+                            else
+                            {
+                    <td><img src="~/productoSinImagen.png" style=" height: 150px; width: 160px;" alt="Imagen usuario"></td>
+                            }
+                     <td><a class="btn btn-danger " href="@Url.Action("Eliminar", "VentaProducto", new { IdProducto= ventaProducto.Producto.IdProducto})"><i class="bi bi-x-circle"></i></a></td>
+                    @*<td>@producto.Descripcion</td>
+                    @*<td class="hidden">@usuario.Rol.IdRol</td>*@
+                    
+                   @* @if (producto.Imagen != null)
+                            {*@
+                   @* <td><img src="data:image/jpeg;base64, @producto.Imagen" style=" height: 150px; width: 150px;" /></td>*@
+                           @* }
+                            else
+                            {*@
+                   @* <td><img src="~/productoSinImagen.png" style=" height: 150px; width: 160px;" alt="Imagen usuario"></td>
+                            }
+
+*@
+                    
+
+                    @*<td class="text-center"><a class="btn btn-warning bi bi-pencil-square" href="@Url.Action("Form","Producto", new { IdProducto = producto.IdProducto})"></a></td>
+                    <td class="text-center"><a class="btn btn-danger bi bi-trash3" href="@Url.Action("Delete","Producto", new { IdProducto = producto.IdProducto })" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a></td>*@
+                </tr>
+                             }
+            </tbody>
+        </table>
+
+        @*</div>*@
+    </div>
+   
+
+</div>
+
+
+
+@section Scripts
+{
+    <script type="text/javascript">
+    function Agregar(IdProducto, idEtiqueta){
+          
+       
+         
+        $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Agregar")',
+                    dataType: 'json',
+                    data: { IdProducto},
+                    success: function(cantidad){   
+                      $("#idproducto" + IdProducto).append(cantidad)
+                    },
+                    error: function (ex) {
+                        alert('Failed.' + ex);
+                    }
+
+                });
+
+
+    };
+
+    </script>
+}
+
+

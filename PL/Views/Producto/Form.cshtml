@@ -1,0 +1,283 @@
+﻿@model ML.Producto
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Productos</h2>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form", "Producto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+                <div class="row">
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group" style = "display: none;">
+                                    <div class="">
+
+                                        @Html.LabelFor(model => model.IdProducto, new { @class = "hidden" })
+
+                                        @Html.TextBoxFor(model => model.IdProducto, new { @class = "hidden form-control" })
+
+                                        @Html.ValidationMessageFor(model => model.IdProducto)
+
+                                    </div>
+
+                                </div>
+
+                                    <div class="form-group">
+                                        <div class="">
+
+                                            @Html.LabelFor(model => model.Nombre)
+
+                                             <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-text"></i></span>
+                                                  @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "textNombre" })
+
+                                                  @Html.ValidationMessageFor(model => model.Nombre)
+                                            </div>
+
+                                            
+                                        </div>
+
+                                    </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <div class="">
+                                        @Html.LabelFor(model => model.Proveedor.IdProveedor)
+
+                                        <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-shop-window"></i></span>
+                                                    @Html.DropDownListFor(model => model.Proveedor.IdProveedor, new SelectList(Model.Proveedor.Proveedores, "IdProveedor", "Telefono"), "Slecione un proveedor", new { id = "ddlProveedor", @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.Proveedor.IdProveedor)
+                                            </div>
+
+                                        
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+
+                                <div class="form-group">
+                                    <div class="">
+
+                                        @Html.LabelFor(model => model.PrecioUnitario)
+                                        <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-cash"></i></span>
+                                                  @Html.TextBoxFor(model => model.PrecioUnitario, new { @class = "form-control" })
+                                                  @Html.ValidationMessageFor(model => model.PrecioUnitario)
+                                         </div>
+
+                                        
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                        <div class="form-group">
+                                            <div class="">
+                                                @Html.LabelFor(model => model.Departamento.Area.IdArea)
+                                                 <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-collection"></i></span>
+                                                          @Html.DropDownListFor(model => model.Departamento.Area.IdArea, new SelectList(Model.Departamento.Area.Areas, "IdArea", "Nombre"), "Slecione un Area", new { id = "ddlArea", @class = "form-control" })
+                                                          @Html.ValidationMessageFor(model => model.Departamento.Area.IdArea)
+                                                 </div>
+
+                                               
+
+                                            </div>
+                                        </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <div class="">
+
+                                        @Html.LabelFor(model => model.Stock)
+
+                                        <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-box-fill"></i></span>
+                                                  @Html.TextBoxFor(model => model.Stock, new { @class = "form-control" })
+                                                  @Html.ValidationMessageFor(model => model.Stock)
+                                         </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                 <div class="form-group">
+                                    <div class="">
+                                        @Html.LabelFor(model => model.Departamento)
+                                        <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-collection"></i></span>
+                                                                               @if (Model.Departamento.Departamentos == null)
+                                                            {
+                                                                @Html.DropDownListFor(model => model.Departamento.IdDepartamento, new SelectList(string.Empty, "Value", "Text"), "Selecciona un departamento", htmlAttributes: new { id = "ddlDepartamento", @class = "form-control" })
+                                                            }
+                                                            else
+                                                            {
+                                                                @Html.DropDownListFor(model => model.Departamento.IdDepartamento, new SelectList(Model.Departamento.Departamentos, "IdDepartamento", "Nombre"), "Selecione un departamento", new { id = "ddlDepartamento", @class = "form-control" })
+                                                            }
+                                                 </div>
+                                       
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <div class="" >
+
+                                        @Html.LabelFor(model => model.Descripcion)
+
+
+                                        <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-text"></i></span>
+                                                  @Html.TextBoxFor(model => model.Descripcion, new { @class = "form-control", @rows="3"})
+                                                  @Html.ValidationMessageFor(model => model.Descripcion)
+                                         </div>
+                                        
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+
+                    <div class="col-4">
+                            <div class="form-group">
+
+                            <div class="">
+                                @Html.LabelFor(model => model.Imagen)
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-image"></i></span>
+                                     
+                                        <input type="file" name="inputImagen" onchange="readURL(this);" class="input-group-text">
+                                    </div>
+                                
+                                @if (Model.Imagen != null)
+                                {
+                                    <img id="ImagenPreview" src="data:image/jpeg;base64, @(Model.Imagen)" width="150" height="150" />
+                                }
+                                else
+                                {
+                                    <img id="ImagenPreview" src="~/productoSinImagen.png" style=" height: 150px; width: 150px; " />
+                                }
+
+                                @Html.ValidationMessageFor(model => model.Imagen)
+                            </div>
+
+                        </div>
+                        @Html.HiddenFor(model => model.Imagen)
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="row p-2">
+
+                    <div class="form-group p-2">
+                        <div class="col-md-12 d-flex justify-content-evenly p-2">
+
+
+                            <input type="submit" value="Guardar" class="btn btn-success" />
+
+                            @Html.ActionLink("Regresar", "GetAll", "Departamento", htmlAttributes: new { @class = "btn btn-danger" })
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+               
+
+            }
+
+        </div>
+
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript">
+
+    
+        $(document).ready(function () {
+            $("#ddlArea").change(function () {
+                $("#ddlDepartamento").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetDepartamento")',
+                    dataType: 'json',
+                    data: { IdArea: $("#ddlArea").val() },
+                    success: function (departamentos) {
+                        $("#ddlDepartamento").append('<option value="0">' + 'Seleccione una opción' + '</option>');
+                        $.each(departamentos, function (i, departamentos) {
+                            $("#ddlDepartamento").append('<option value="'
+                                + departamentos.idDepartamento + '">'
+                                + departamentos.nombre + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed.' + ex);
+                    }
+                });
+            });
+
+          });
+
+           
+
+
+    </script>
+
+    <script type="text/javascript">
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ImagenPreview').attr('src', e.target.result);
+
+            };
+
+            reader.readAsDataURL(input.files[0]);
+
+        }
+    }
+</script>
+
+}

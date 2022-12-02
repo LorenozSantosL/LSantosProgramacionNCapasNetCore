@@ -1,0 +1,304 @@
+﻿@model ML.Result
+
+
+@{
+    ViewData["Title"] = "CargaMasiva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Carga Masiva</h1>
+
+
+<div class="container">
+
+    <div class="row">
+
+             <div class="col-6">
+                 <div class="">
+                        <div class="col">
+
+                            <div class="">
+                                <div class="d-grid gap-1 mx-auto">
+                                     <button class="btn btn-outline-warning" type="button" onclick="activeInput('IdTxt')">TXT</button>
+                                 </div>
+                            </div>
+                            @using (Html.BeginForm("CargaTXT", "CargaMasiva", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                <div class="p-2">
+                                    <div class="input-group mb-3">
+                                       <input type="file" name="archivoTXT" id="inputFileTxt" class="form-control" onchange="validateFile(this);" style="display: none;" />
+                                    </div>
+                                    
+                                </div>
+                                <div class="p-2">
+                                    <button type="submit" id="subirArchivo" class="btn btn-outline-success" type="button" style="display: none;">Cargar</button>
+                                </div>
+                             
+                            
+                              }  
+                         </div>
+                        <div class="col-4">
+                                    
+                            </div>         
+                        <div class="col-2" >
+                                
+                        </div>      
+
+                                              
+                 </div>
+             </div>
+
+             <div class="col-6">
+                 <div class="">
+                        <div class="col">
+
+                            <div class="">
+                                <div class="d-grid gap-1 mx-auto">
+                                     <button class="btn btn-outline-success" type="button" onclick="activeInput('IdExcel')" >Excel</button>
+                                 </div>
+                            </div>
+                            @using (Html.BeginForm("UsuarioCargaMasiva", "CargaMasiva", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                <div class="p-2">
+                                    <div class="input-group mb-3">
+                                       <input type="file" name="FileExcel" class="form-control" id="inputFileExcel"style="display: none;" />
+                                    </div>
+                                   
+                                </div>
+
+                                 <div class="p-2">
+                                 @if (!Model.Correct)
+                                    {
+                                        <div class="row g-3">
+                                            <div class="col-md-1">
+                                                <a><input type="submit" value="Procesar" class="btn btn-success" style="display: none;" id="boton-procesar"/></a>
+                                                <br />
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="row g-3">
+                                            <div class="col-md-1">
+                                                <a><input type="submit" value="Insertar" class="btn btn-success" /></a>
+                                                <br />
+                                            </div>
+                                        </div>
+                                    }
+                                
+                                    
+                                </div>
+                             
+                            
+                              }  
+                         </div>
+                        <div class="col-4">
+                                    
+                            </div>         
+                        <div class="col-2" >
+                                
+                        </div>      
+
+                                              
+                 </div>
+             </div>
+    </div>
+
+
+    @*<div class="row">
+
+             <div class="p-2">
+                 <div class="row">
+                        <div class="col">
+
+                            <div class="form-control">
+                                <div class="d-grid gap-1 mx-auto">
+                                     <button class="btn btn-outline-success" type="button" onclick="activeInput('IdExcel')" >Excel</button>
+                                 </div>
+                            </div>
+                            @using (Html.BeginForm("UsuarioCargaMasiva", "CargaMasiva", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                <div class="form-control">
+                                    <input type="file" name="FileExcel" id="inputFileExcel"style="display: none;" />
+                                </div>
+
+                                 <div class="form-control">
+                                 @if (!Model.Correct)
+                                    {
+                                        <div class="row g-3">
+                                            <div class="col-md-1">
+                                                <a><input type="submit" value="Procesar" class="btn btn-success" style="display: none;" id="boton-procesar"/></a>
+                                                <br />
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="row g-3">
+                                            <div class="col-md-1">
+                                                <a><input type="submit" value="Insertar" class="btn btn-success" /></a>
+                                                <br />
+                                            </div>
+                                        </div>
+                                    }
+                                
+                                    
+                                </div>
+                             
+                            
+                              }  
+                         </div>
+                        <div class="col-4">
+                                    
+                            </div>         
+                        <div class="col-2" >
+                                
+                        </div>      
+
+                                              
+                 </div>
+             </div>
+    </div>*@
+
+             
+
+
+
+
+    @*@using (Html.BeginForm("UsuarioCargaMasiva", "CargaMasiva", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+                
+                 <div class="col-4">
+                         <div class="">
+                             <input type="file" name="FileExcel" id="inputFileExcel"style="display: none;" />
+                         </div>
+                    </div>
+
+
+                <div class="row" style="margin: 20px;">
+                   
+                    @if (!Model.Correct)
+            {
+                <div class="row g-3">
+                    <div class="col-md-1">
+                        <a><input type="submit" value="Procesar" class="btn btn-success" style="display: none;" id="boton-procesar"/></a>
+                        <br />
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row g-3">
+                    <div class="col-md-1">
+                        <a><input type="submit" value="Insertar" class="btn btn-success" /></a>
+                        <br />
+                    </div>
+                </div>
+            }
+
+                </div>
+
+                <div class="row" style="margin: 20px;">
+                   
+                   
+
+                </div>
+
+                
+
+                
+
+            }*@
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        @if (Model.Objects != null)
+        {
+            @if (Model.Objects.Count > 0)
+            {
+                <table class="table table-bordered table-responsive">
+                    <thead>
+                        <tr class="text-center">
+                            <td>IdRegistro</td>
+                            <td>Error</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (ML.ErrorExcel error in Model.Objects)
+                        {
+                            <tr class="text-center">
+                                <td>@error.IdRegistro</td>
+                                <td>@error.Mensaje</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        }
+        else
+        {
+
+        }
+    </div>
+</div>
+
+
+
+
+@section Scripts
+{
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript">
+
+        function activeInput(typeFile){
+
+            if(typeFile == "IdTxt"){
+                document.getElementById('inputFileTxt').style.display = "block";
+                document.getElementById('inputFileExcel').style.display = "none";
+                document.getElementById('subirArchivo').style.display = "block";
+                document.getElementById('boton-procesar').style.display = "none";
+            }
+            else{
+                if(typeFile == "IdExcel"){
+                     document.getElementById('inputFileExcel').style.display = "block";
+                     document.getElementById('inputFileTxt').style.display = "none";
+                     document.getElementById('subirArchivo').style.display = "none";
+                     document.getElementById('boton-procesar').style.display = "block";
+                }
+            }
+        }
+
+
+    </script>
+    <script>
+    
+    function validateFile()
+        {
+            var allowedExtension = ['txt'];
+            var fileExtension = document.getElementById('inputFileTxt').value.split('.').pop().toLowerCase();
+            var isValidFile = false;
+
+                for(var index in allowedExtension) {
+                    if(fileExtension === allowedExtension[index]) {
+                        isValidFile = true;
+                        document.getElementById('subirArchivo').style.display = "block";
+
+                        break;
+                    }
+                }
+
+                if(!isValidFile) {
+                    alert('Las extension permitida es: *.' + allowedExtension.join(', *.'));
+                    document.getElementById('inputFileTxt').value="";
+                }
+
+                return isValidFile;
+        };
+    
+    </script>
+
+
+}
