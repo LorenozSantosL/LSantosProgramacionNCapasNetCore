@@ -58,7 +58,7 @@
                     <td>@ventaProducto.Producto.Stock</td>
                     <td><a class="btn btn-outline-success " href="@Url.Action("Agregar", "VentaProducto", new { IdProducto= ventaProducto.Producto.IdProducto})"><i class="bi bi-plus"></i></a></td>
             
-                    <td><button id="idproducto+ @ventaProducto.Producto.IdProducto" type="button" class="btn btn-success" onclick="Agregar(@ventaProducto.Producto.IdProducto, this.id)"><i class="bi bi-plus"></i></button></td>
+                   @* <td><button id="idproducto+ @ventaProducto.Producto.IdProducto" type="button" class="btn btn-success" onclick="Agregar(@ventaProducto.Producto.IdProducto, this.id)"><i class="bi bi-plus"></i></button></td>*@
                     <td id="Cantidad">@ventaProducto.Cantidad</td>
                     <td><a class="btn btn-outline-danger " href="@Url.Action("Desagregar", "VentaProducto", new { IdProducto= ventaProducto.Producto.IdProducto})"><i class="bi bi-dash"></i></a></td>
                     @if (ventaProducto.Producto.Imagen != null)

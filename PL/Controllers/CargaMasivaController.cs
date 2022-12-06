@@ -146,6 +146,8 @@ namespace PL.Controllers
         [HttpPost]
         public ActionResult UsuarioCargaMasiva(ML.Usuario usuario)
         {
+            ML.Result valida = new ML.Result();
+            bool verifica = false;
 
             IFormFile archivo = Request.Form.Files["FileExcel"]; //obtenemos el arhivo
             //Session 
@@ -192,8 +194,9 @@ namespace PL.Controllers
                             }
                             else
                             {
+                               
                                 ViewBag.Message = "Ocurrio un error al leer el archivo";
-                                return View("Modal");
+                                return View("Modal", verifica);
                             }
 
                         }
@@ -207,7 +210,7 @@ namespace PL.Controllers
             {
                 string rutaArchivoExcel = HttpContext.Session.GetString("PathArchivo");
                 string connectionString = _configuration["ConnectionStringExcel:Value"] + rutaArchivoExcel;
-
+                
 
                 ML.Result resultData = BL.Usuario.ConvertirExcelToDataTable(connectionString);
 
@@ -228,22 +231,24 @@ namespace PL.Controllers
                         
                     }
 
-                    if(resultErrores.Objects.Count > 0)
+                    if (resultErrores.Objects.Count > 0)
                     {
                         //string fileError = Path.Combine(_hostingEnvironment.WebRootPath, @"~\Files\logErrores.txt");
                         string fileError = _hostingEnvironment.WebRootPath + @"\Files\logErrores.txt";
 
                         using (StreamWriter writer = new StreamWriter(fileError))
                         {
-                            foreach( string Ln in resultErrores.Objects)
+                            foreach (string Ln in resultErrores.Objects)
                             {
                                 writer.WriteLine(Ln);
                             }
                         }
                         ViewBag.Message = "Los usuarios no han sido agregados correctamente";
+                        valida.Correct = false;
                     }
                     else
                     {
+                        valida.Correct = true;
                         ViewBag.Message = "Se han registrado los usuarios";
                     }
                 }
@@ -251,7 +256,7 @@ namespace PL.Controllers
 
 
             }
-            return PartialView("Modal");
+            return PartialView("Modal", valida);
         }
     }
 }
