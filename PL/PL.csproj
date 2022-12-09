@@ -32,6 +32,7 @@
   <ItemGroup>
     <Folder Include="Imagen\" />
     <Folder Include="CargaMasiva\" />
+    <Folder Include="wwwroot\cssLogin\" />
     <Folder Include="wwwroot\Imagen\" />
     <Folder Include="wwwroot\Files\" />
   </ItemGroup>

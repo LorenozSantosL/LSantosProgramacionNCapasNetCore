@@ -133,5 +133,20 @@ namespace SL.Controllers
            
 
         }
+
+        [HttpGet("GetByUserName/{username}")]
+        public IActionResult Login(string username)
+        {
+            ML.Result result = BL.Usuario.GetByUserName(username);
+
+            if(result.Correct)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }

@@ -451,5 +451,78 @@ namespace BL
 
             return result;
         }
+
+
+        public static ML.Result GetByUserName(string Username)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using(DL.LsantosProgramacionNcapasContext context = new DL.LsantosProgramacionNcapasContext())
+                {
+                    //var objUsuario = context.Usuarios.FromSql($"UsuarioGetByUserName '{Username}'").AsEnumerable().FirstOrDefault();
+                    //var objUsuario = context?.Usuarios?.FromSqlRaw($"UsuarioGetByUserName '{Username}'").AsEnumerable().FirstOrDefault();
+                    var objUsuario = context.Usuarios?.FromSqlRaw($"UsuarioGetByUserName '{Username}'").AsEnumerable().FirstOrDefault();
+                    if (objUsuario != null)
+                    {
+                        ML.Usuario usuario = new ML.Usuario();
+                        usuario.IdUsuario = objUsuario.IdUsuario;
+                        usuario.Nombre = objUsuario.Nombre;
+                        usuario.ApellidoPaterno = objUsuario.ApellidoPaterno;
+                        usuario.ApellidoMaterno = objUsuario.ApellidoMaterno;
+                        usuario.FechaNacimiento = objUsuario.FechaNacimiento.ToString("dd-MM-yyyy");
+                        usuario.Sexo = objUsuario.Sexo;
+                        usuario.Email = objUsuario.Email;
+                        usuario.UserName = objUsuario.UserName;
+                        usuario.Password = objUsuario.Password;
+                        usuario.Telefono = objUsuario.Telefono;
+                        usuario.Celular = objUsuario.Celular;
+                        usuario.CURP = objUsuario.Curp;
+
+                        usuario.Rol = new ML.Rol();
+                        usuario.Rol.IdRol = objUsuario.IdRol.Value;
+                        usuario.Imagen = objUsuario.Imagen;
+                        usuario.Estatus = objUsuario.Estatus;
+
+                        usuario.Direccion = new ML.Direccion();
+                        usuario.Direccion.IdDireccion = objUsuario.IdDireccion;
+                        usuario.Direccion.Calle = objUsuario.Calle;
+                        usuario.Direccion.NumeroInterior = objUsuario.NumeroInterior;
+                        usuario.Direccion.NumeroExterior = objUsuario.NumeroExterior;
+
+
+                        usuario.Direccion.Colonia = new ML.Colonia();
+                        usuario.Direccion.Colonia.IdColonia = objUsuario.IdColonia;
+                        usuario.Direccion.Colonia.Nombre = objUsuario.ColoniaNombre;
+                        usuario.Direccion.Colonia.CodigoPostal = objUsuario.CodigoPostal;
+
+                        usuario.Direccion.Colonia.Municipio = new ML.Municipio();
+                        usuario.Direccion.Colonia.Municipio.IdMunicipio = objUsuario.IdMunicipio;
+                        usuario.Direccion.Colonia.Municipio.Nombre = objUsuario.MunicipioNombre;
+
+                        usuario.Direccion.Colonia.Municipio.Estado = new ML.Estado();
+                        usuario.Direccion.Colonia.Municipio.Estado.IdEstado = objUsuario.IdEstado;
+                        usuario.Direccion.Colonia.Municipio.Estado.Nombre = objUsuario.EstadoNombre;
+
+                        usuario.Direccion.Colonia.Municipio.Estado.Pais = new ML.Pais();
+                        usuario.Direccion.Colonia.Municipio.Estado.Pais.IdPais = objUsuario.IdPais;
+                        usuario.Direccion.Colonia.Municipio.Estado.Pais.Nombre = objUsuario.PaisNombre;
+
+
+                        result.Object = usuario;
+                        result.Correct = true;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                result.Correct = false;
+                result.EX = ex;
+                result.Message = "Error: "+ result.EX;
+            }
+
+            return result;
+        }
     }
 }

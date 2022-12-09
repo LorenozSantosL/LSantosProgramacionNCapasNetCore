@@ -480,6 +480,75 @@ namespace PL.Controllers
                 return Json(result);
         }
 
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(string UserName, string Password)
+        {
+            //ML.Result result = BL.Usuario.GetByUserName(UserName);
+
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                string urlAPI = _configuration["UrlAPI"];
+                using(var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(urlAPI);
+
+                    var responseTask = client.GetAsync("Usuario/GetByUserName/" + UserName);
+
+                    responseTask.Wait();
+
+                    var resultServicio = responseTask.Result;
+
+                    if(resultServicio.IsSuccessStatusCode)
+                    {
+                        var readTask = resultServicio.Content.ReadAsAsync<ML.Result>();
+                        readTask.Wait();
+
+                        ML.Usuario usuarioItem = new ML.Usuario();
+
+                        usuarioItem = Newtonsoft.Json.JsonConvert.DeserializeObject<ML.Usuario>(readTask.Result.Object.ToString());
+                        result.Object = usuarioItem;
+                        result.Correct = true;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                result.Correct = false;
+                result.Message = ex.Message;
+            }
+
+            if (result.Correct)
+            {
+                ML.Usuario usuario = (ML.Usuario)result.Object;
+
+                if(usuario.Password == Password)
+                {
+                    return Redirect("Home/Index");
+                }
+                else
+                {
+                    ViewBag.Message = "El UserName o contraseña es incorrecto..";
+                    return PartialView("Modal");
+                }
+            }
+            else
+            {
+                ViewBag.Message = "El UserName o contraseña es incorrecto..";
+                return PartialView("Modal");
+            }
+            
+
+            
+        }
+
 
     }
 }
