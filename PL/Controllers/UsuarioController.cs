@@ -536,13 +536,13 @@ namespace PL.Controllers
                 else
                 {
                     ViewBag.Message = "El UserName o contraseña es incorrecto..";
-                    return PartialView("Modal");
+                    return PartialView("ModalLogin");
                 }
             }
             else
             {
                 ViewBag.Message = "El UserName o contraseña es incorrecto..";
-                return PartialView("Modal");
+                return PartialView("ModalLogin");
             }
             
 
